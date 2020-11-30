@@ -1,0 +1,34 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="jumbotron">
+    <h2>{{ post_1.title }}</h2>
+    {% if post_1.image and post_1.image.url != '/media/temp.jpg' %}
+        <img src="{{post_1.image.url }}" alt="Изображение" widht="300" height="200" />
+    {% endif %}
+    <p>{{ post_1.content|linebreaksbr }}</p>
+    <p>Автор:<a>{{ post_1.author }}</a></p>
+    <p><a href="{% url 'blog' %}" class="btn btn-primary btn-large">Назад</a></p><br />
+    <strong>Комментарии:</strong>
+    {% for comment in comments %}
+        <br />
+        <a>{{ comment.author }}</a><br />
+        <strong>{{ comment.text|linebreaksbr }}</strong><br />
+        <h6>Дата: {{ comment.date }}</h6>
+    {% endfor %}
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <br />
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary btn-large">Отправить</button>
+            </div>
+        </form>
+    {% else %}
+        <h3>Для добавления комменатария нужно авторизироваться!</h3>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    {% if form != None %}
+    <h2>{{ title }}:</h2>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <label id="t1" for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>{{ form.name }}<br />
+            <label for="{{ form.receiver.id_for_label }}">{{ form.receiver.label }}:</label>{{ form.receiver }}<br />
+            <label for="{{ form.score.id_for_label }}">{{ form.score.label }}:</label>{{ form.score }}<br />
+            <label for="{{ form.message.id_for_label }}">{{ form.message.label }}:</label>{{ form.message }}<br />
+            <label for="{{ form.agree.id_for_label }}">{{ form.agree.label }}:</label>{{ form.agree }}<br />
+            <input id="b1" class="btn btn-primary btn-large" type="submit" value="Отправить" />
+        </form>
+        <script>
+            function b1_colorin(){$('#b1').css('color', 'black');}
+            function b1_colorout(){$('#b1').css('color', 'white');}
+            $('#b1').mouseover(b1_colorin);
+            $('#b1').mouseout(b1_colorout);
+        </script>
+        <script>
+            function textclick(){$('#id_name').css('background-color', 'rgba(255, 45, 77, 0.075)');}
+            function textclickoff(){$('#id_name').css('background-color', 'white');}
+            $('#id_name').focus(textclick);
+            $('#id_name').blur(textclickoff);
+        </script>
+        <script>
+            function textclick(){$('#id_email').css('background-color', 'rgba(255, 45, 77, 0.075)');}
+            function textclickoff(){$('#id_email').css('background-color', 'white');}
+            $('#id_email').focus(textclick);
+            $('#id_email').blur(textclickoff);
+        </script>
+        <script>
+            function textclick(){$('#id_theme').css('background-color', 'rgba(255, 45, 77, 0.075)');}
+            function textclickoff(){$('#id_theme').css('background-color', 'white');}
+            $('#id_theme').focus(textclick);
+            $('#id_theme').blur(textclickoff);
+        </script>
+        <script>
+            function textclick(){$('#id_message').css('background-color', 'rgba(255, 45, 77, 0.075)');}
+            function textclickoff(){$('#id_message').css('background-color', 'white');}
+            $('#id_message').focus(textclick);
+            $('#id_message').blur(textclickoff);
+        </script>
+    </div>
+    {% else %}
+    <br /><h2>Спасибо за отзыв =)</h2>
+    <strong>Вы сообщили следующее:</strong>
+    <ul>
+        <li><span>Ваше имя: </span>{{ data.name }}</li>
+        <li><span>Получатель: </span>{{ data.receiver }}</li>
+        <li><span>Просмотренная постановка: </span>{{ data.score }}</li>
+        <li><span>Отзыв: </span>{{ data.message }}</li>
+        <li><span>Я согласен на отправление моего отзыва: </span>{{ data.agree }}</li>
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

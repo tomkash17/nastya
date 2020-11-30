@@ -1,0 +1,14 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="jumbotron">
+    <h2>{{ title }}:</h2>
+
+        <strong>Наши социальные сети:</strong><br />
+        <a href="https://vk.com/club62930963"><img src="{% static 'app/content/vk.jpg' %}" width="100px" alt="Вконтакте" /></a>
+        <a href="https://www.instagram.com/shchelkunchik_official"><img src="{% static 'app/content/instagram.jpg' %}" width="100px" alt="Инстаграм" /></a>
+</div>
+
+{% endblock %}
